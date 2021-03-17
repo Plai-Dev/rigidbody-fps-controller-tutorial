@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\iksud_gd4e27e\AppData\Local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\iksud_gd4e27e\AppData\Local\JetBrains\Rider2020.3\resharper-host\Local\Transient\Rider\v203\SolutionCaches\_tutorial.-106888026.00" t="ExcludeRecursive" />
+    <e p="D:\Unity\Unity Projects\tutorial" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="CameraFollow.cs" t="Include" />
+        <e p="Fantasy Skybox FREE" t="Include">
+          <e p="Readme.txt" t="Include" />
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="PlayerLook.cs" t="Include" />
+          <e p="PlayerMovement.cs" t="Include" />
+          <e p="SlopeHandler.cs" t="Include" />
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="tutorial.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>

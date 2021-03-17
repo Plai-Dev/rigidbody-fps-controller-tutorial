@@ -9,15 +9,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform orientation;
 
     [Header("Movement")]
-    public float moveSpeed = 6f;
+    [SerializeField] float moveSpeed = 6f;
     [SerializeField] float airMultiplier = 0.4f;
     float movementMultiplier = 10f;
+
+    [Header("Sprinting")]
+    [SerializeField] float walkSpeed = 4f;
+    [SerializeField] float sprintSpeed = 6f;
+    [SerializeField] float acceleration = 10f;
 
     [Header("Jumping")]
     public float jumpForce = 5f;
 
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("Drag")]
     [SerializeField] float groundDrag = 6f;
@@ -27,9 +33,10 @@ public class PlayerMovement : MonoBehaviour
     float verticalMovement;
 
     [Header("Ground Detection")]
+    [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] float groundDistance = 0.2f;
     bool isGrounded;
-    float groundDistance = 0.4f;
 
     Vector3 moveDirection;
     Vector3 slopeMoveDirection;
@@ -62,10 +69,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, 1, 0), groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         MyInput();
         ControlDrag();
+        ControlSpeed();
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
         {
@@ -85,7 +93,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        if (isGrounded)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
+    }
+
+    void ControlSpeed()
+    {
+        if (Input.GetKey(sprintKey) && isGrounded)
+        {
+            moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, acceleration * Time.deltaTime);
+        }
     }
 
     void ControlDrag()
